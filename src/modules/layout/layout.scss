@@ -1,0 +1,101 @@
+@import "./../../scss/_variables";
+@import "./../../scss/_mixins";
+
+.app-header {
+  background-color: $primary_color_1;
+  padding-inline: 0px;
+  height: 75px;
+  @include respond-to($breakpoint-sm) {
+    height: 135px;
+  }
+  .ant-container{
+    padding-top: 8px;
+    max-width: 1350px;
+  }
+  .menus{
+    margin-left: 0px;
+    .header-menu{
+      background-color: transparent;
+      color:$white_color;
+      .ant-menu-item{
+        margin-right: 15px;
+      }
+     
+    }
+  }
+  
+  .ant-row {
+    align-items: center;
+    @include respond-to($breakpoint-sm) {
+      display: flex;
+      flex-direction: column;
+    }
+    .ant-col-8 {
+      @include respond-to($breakpoint-sm) {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+  .logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    img {
+      width: 35px;
+      padding-right: 25px;
+    }
+    .logo-text {
+      color: $white_color;
+      margin-top: 10px;
+      margin-left: -8px;
+      letter-spacing: 5px;
+    }
+  }
+}
+.footer-wrap{
+  background-color: $primary_color_4;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  @include respond-to($breakpoint-sm) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .logo {
+    width: 30px;
+    height: 30px;
+    @include respond-to($breakpoint-sm) {
+      margin-bottom: 20px;
+    }
+  }
+  span{
+    color:$white_color;
+    @include respond-to($breakpoint-sm) {
+      margin-bottom: 20px;
+    }
+  }
+  .connect{
+    display: flex;
+    align-items: center;
+    @include respond-to($breakpoint-sm) {
+      display: flex;
+      flex-direction: column;
+    }
+    span{
+      @include respond-to($breakpoint-sm) {
+        margin-top: 10px;
+      }
+      img{
+        margin: 0px 5px;
+      }
+    }
+  }
+}
+
+.ant-menu-submenu-popup{
+  @include respond-to($breakpoint-sm) {
+    // margin-left: 50px !important;
+  }
+}

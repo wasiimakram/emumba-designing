@@ -1,0 +1,11 @@
+@mixin respond-to($breakpoint) {
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+}
+@mixin borderr-bottom(){
+  border-bottom: 3px solid $primary_color_2;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+}
