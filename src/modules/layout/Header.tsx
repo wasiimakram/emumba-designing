@@ -1,38 +1,110 @@
-import { Button, Col, Layout, Menu, MenuProps, Row, Typography } from "antd";
-import React from "react";
-import { useHistory } from "react-router-dom";
-import "./layout.scss";
-import Menus from "./common/Menu";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
 
-const { Header, Content } = Layout;
-const { Title, Text } = Typography;
+const pages = ["Products", "Pricing", "Blog"];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-const Navbar: React.FC = () => {
-  const history = useHistory();
+function Navbar() {
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <Header className="app-header">
-      <Content className="ant-container">
-        <Row>
-          <Col span={8}>
-            <Content
-              className="logo"
-              onClick={() => {
-                history.push("/");
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: (theme) => theme.palette.primary.main }}
+    >
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          {/* Desktop View */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+            <img src="assets/images/logo.png" alt="Logo" />
+          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
               }}
             >
-              <img className="img-fluid" src="assets/images/logo.jpg" alt="" />
-              <Title level={2} className="logo-text">
-                MUMBA
-              </Title>
-            </Content>
-          </Col>
-          <Col className="menus" span={10} offset={6}>
-            <Menus />
-          </Col>
-        </Row>
-      </Content>
-    </Header>
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          {/* Mobile Responsive */}
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <img src="assets/images/logo.png" alt="Logo" />
+          </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-};
+}
 export default Navbar;
